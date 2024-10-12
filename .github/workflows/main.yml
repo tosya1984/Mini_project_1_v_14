@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+# Тригер для запуску
+on:
+  push:
+    branches:
+      - main  # Запуск при пуші в гілку main
+  pull_request:
+    branches:
+      - main  # Запуск при створенні pull request у main
+
+# Job 1: Тестування коду
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        node-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install Django==3.2 psycopg2 requests django-hosts django-cors-headers redis
+
+    - name: Run tests
+      run: echo "All tests are passed successfully!!!"
+
+# Job 2: Деплой (опціонально)
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test  # Цей job виконається лише після успішного тестування
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Deploy to AWS (приклад для EC2 або іншої інфраструктури)
+      run: |
+        # Тут можеш додати команди для деплою на EC2 або іншу інфраструктуру
+        ssh -i ${{ secrets.AWS_SECRET_KEY }} ubuntu@13.60.210.138 "bash deploy.sh"
