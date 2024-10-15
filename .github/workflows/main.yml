@@ -46,6 +46,10 @@ jobs:
 
     - name: Deploy to AWS (приклад для EC2 або іншої інфраструктури)
       run: |
-        # Тут можеш додати команди для деплою на EC2 або іншу інфраструктуру
-        ssh -i ~/.ssh/id_rsa ubuntu@13.60.210.138
-        touch hello.txt
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.60.210.138 << 'EOF'
+          cd ~/project/Mini_project_1_v_14/
+          git pull origin main
+          cd ..
+          touch ~/project/hello.txt
+        EOF
+
