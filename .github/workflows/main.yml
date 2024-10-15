@@ -38,8 +38,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Add SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.AWS_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
     - name: Deploy to AWS (приклад для EC2 або іншої інфраструктури)
       run: |
         # Тут можеш додати команди для деплою на EC2 або іншу інфраструктуру
-        ssh -i ${{ secrets.AWS_SSH_KEY }} ubuntu@13.60.210.138
+        ssh -i ~/.ssh/id_rsa ubuntu@13.60.210.138
         touch hello.txt
