@@ -48,8 +48,13 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.60.210.138 << 'EOF'
           cd ~/project/Mini_project_1_v_14/
+          sudo docker stop $(sudo docker ps -q)
+          sudo docker conteiner prune
+          sudo docker rmi $(sudo docker images -q)
           git pull origin main
-          cd ..
-          touch ~/project/hello.txt
+          sudo docker build ./backend_rds myrdsapp
+          sudo docker build ./backend_redis myredisapp
+          sudo bash ./backend_rds/script
+          sudo bash ./backend_redis/script
         EOF
 
