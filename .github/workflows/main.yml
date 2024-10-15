@@ -38,6 +38,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    # Встановлення AWS CLI для керування ресурсами AWS
+    - name: Install AWS CLI
+      run: sudo apt-get install -y awscli
+
     - name: Add SSH key
       run: |
         mkdir -p ~/.ssh
@@ -47,10 +51,10 @@ jobs:
     - name: Deploy to AWS (приклад для EC2 або іншої інфраструктури)
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.60.210.138 << 'EOF'
-          cd ~/project/Mini_project_1_v_14/
           sudo docker stop $(sudo docker ps -q)
           sudo docker conteiner prune
           sudo docker rmi $(sudo docker images -q)
+          cd ~/project/Mini_project_1_v_14/
           git pull origin main
           sudo docker build ./backend_rds myrdsapp
           sudo docker build ./backend_redis myredisapp
