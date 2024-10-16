@@ -48,17 +48,22 @@ jobs:
         echo "${{ secrets.AWS_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
+    - name: Add EC2 to known hosts
+      run: |
+        ssh-keyscan -H "13.60.210.138" >> ~/.ssh/known_hosts
+
     - name: Deploy to AWS (приклад для EC2 або іншої інфраструктури)
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.60.210.138 << 'EOF'
-          sudo docker stop $(sudo docker ps -q)
-          sudo docker conteiner prune
-          sudo docker rmi $(sudo docker images -q)
+          docker stop $(docker ps -q)
+          docker conteiner prune
+          docker rmi $(docker images -q)
           cd ~/project/Mini_project_1_v_14/
           git pull origin main
-          sudo docker build ./backend_rds myrdsapp
-          sudo docker build ./backend_redis myredisapp
-          sudo bash ./backend_rds/script
-          sudo bash ./backend_redis/script
+          cd ./Dynamic_services_static_front_project
+          docker build -t myrdsapp ./backend_rds
+          docker build -t myredisapp ./backend_redis
+          bash ./backend_rds/script
+          bash ./backend_redis/script
         EOF
 
