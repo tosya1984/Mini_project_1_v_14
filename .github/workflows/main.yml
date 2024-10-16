@@ -63,7 +63,7 @@ jobs:
           cd ~/project/Mini_project_1_v_14//Dynamic_services_static_front_project
           docker build -t myrdsapp ./backend_rds
           docker build -t myredisapp ./backend_redis
-          bash ./backend_rds/script
-          bash ./backend_redis/script
+          bash ./backend_rds/script.sh
+          bash ./backend_redis/script.sh
         EOF
 
