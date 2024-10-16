@@ -56,7 +56,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.60.210.138 << 'EOF'
           docker stop $(docker ps -q)
-          docker container prune
+          docker container prune -f
           docker rmi $(docker images -q)
           cd ~/project/Mini_project_1_v_14/
           git pull
