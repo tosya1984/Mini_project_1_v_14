@@ -25,4 +25,4 @@ jobs:
       run: |
         pwd
         ls -la
-        aws s3 sync Mini_project_1_v_14/Dynamic_services_static_front_project/frontend/* s3://arn:aws:s3:::tosya-bucket
+        aws s3 sync ./Mini_project_1_v_14/Dynamic_services_static_front_project/frontend/* s3://tosya-bucket  --region eu-north-1
