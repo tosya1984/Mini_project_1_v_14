@@ -36,4 +36,5 @@ jobs:
       run: |
         aws cloudfront create-invalidation \
           --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-          --paths "/*"
+          --paths "/*" \
+          --region eu-north-1
