@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  beckend_rds:
+    #image: your-service1-image
+    build:
+      context: ./Dynamic_services_static_front_project/backend_rds
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV_VAR1=value1
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${PORT}
+      - DB_USER=${USER}
+      - DB_PASSWORD=${PASSWORD}
+      - DB_NAME=${NAME}
+    # networks:
+    #  - project-network
+
+  backend_redis:
+    #image: your-service2-image
+    build:
+      context: ./Dynamic_services_static_front_project/backend_redis
+    ports:
+      - "8001:8001"
+    environment:
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DB=${REDIS_DB}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    # depends_on:
+    #  - backend_rds
+    # networks:
+    #  - project-network
+
+# networks:
+# project-network:
+#    driver: bridge
