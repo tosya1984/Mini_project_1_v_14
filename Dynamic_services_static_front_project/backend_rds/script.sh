@@ -6,5 +6,4 @@ sudo docker run -dp 5000:5000 \
         -e DB_USER="postgre" \
         -e DB_PASSWORD="tosya134526" \
         -e DB_NAME="postgres" \
-        -e DEBUG="False" \
         myrdsapp
