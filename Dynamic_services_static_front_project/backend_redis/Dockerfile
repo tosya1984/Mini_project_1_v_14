@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Виставляємо порт, який використовує додаток (якщо потрібно)
-EXPOSE 5000
+EXPOSE 5001
 
 # Запускаємо сервіс
 CMD ["python", "manage.py", "runserver", "0.0.0.0:5000"]
