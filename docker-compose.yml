@@ -35,7 +35,7 @@ services:
     networks:
      - project-network
 
-   networks:
-    project-network:
-      # driver: bridge
-      external: true
+networks:
+  project-network:
+    # driver: bridge
+    external: true
