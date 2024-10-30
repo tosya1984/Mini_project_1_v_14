@@ -58,6 +58,6 @@ jobs:
           cd ~/project/Mini_project_1_v_14/
           docker compose down --rmi all --volumes
           git pull
-          docker compose up --build
+          docker compose up -d --build
         EOF
 
