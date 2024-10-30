@@ -37,5 +37,5 @@ services:
 
 networks:
   project-network:
-    # driver: bridge
-    external: true
+    driver: bridge
+    # external: true
