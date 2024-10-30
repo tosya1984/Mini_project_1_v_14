@@ -15,8 +15,8 @@ services:
       - DB_USER=${USER}
       - DB_PASSWORD=${PASSWORD}
       - DB_NAME=${NAME}
-    # networks:
-    #  - project-network
+    networks:
+     - project-network
 
   backend_redis:
     #image: your-service2-image
@@ -32,9 +32,10 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     # depends_on:
     #  - backend_rds
-    # networks:
-    #  - project-network
+    networks:
+     - project-network
 
-# networks:
-# project-network:
-#    driver: bridge
+   networks:
+    project-network:
+      # driver: bridge
+      external: true
